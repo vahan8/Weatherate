@@ -26,6 +26,13 @@ class SearchFragment : Fragment() {
 
     private lateinit var citiesAdapter: CityNamesAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // as viewModel is shared to clear previous search results
+        viewModel.clearWeathersList()
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
@@ -76,7 +83,7 @@ class SearchFragment : Fragment() {
                 this@SearchFragment.lifecycle
             ) { newText ->
                 newText?.let {
-                    viewModel.getCurrentWeather(it)
+                    viewModel.getCurrentWeather(it.trim())
                 }
             }
         )

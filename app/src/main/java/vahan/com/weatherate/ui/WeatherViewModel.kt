@@ -52,6 +52,10 @@ class WeatherViewModel(private val repository: WeatherRepository) : ViewModel(),
         _currentWeatherLiveData.value = weather
     }
 
+    fun clearWeathersList() {
+        _currentWeathersLiveData.value = null
+    }
+
     fun updateWeather(weather: CurrentWeatherRemoteModel) {
         _updateWeatherLiveData.value = weather
     }
