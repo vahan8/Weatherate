@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Weatherate</string>
+
+    <string name="humidity">Humidity:</string>
+    <string name="min_temp">Min Temp:</string>
+    <string name="max_temp">Max Temp:</string>
+    <string name="pressure">Pressure:</string>
+    <string name="today">Today</string>
+    <string name="next_days">Next 5 days</string>
+    <string name="search">Search</string>
+    <string name="search_fragment_hint">No results, please enter location full name</string>
+
+
+
+</resources>

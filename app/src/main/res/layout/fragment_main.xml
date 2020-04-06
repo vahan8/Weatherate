@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="vahan.com.weatherate.ui.WeatherViewModel" />
+
+        <variable
+            name="fragment"
+            type="vahan.com.weatherate.ui.main.MainFragment" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:theme="@style/AppTheme.Toolbar"
+            android:background="@color/colorPrimary"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/img_bg_main"
+            app:visibleIf="@{viewmodel.loaderCountLiveData == 0}"
+            tools:context=".ui.main.MainFragment">
+
+            <TextView
+                android:id="@+id/humidityTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/humidity"
+                android:textSize="12sp"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/humidityTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="3dp"
+                android:textSize="12sp"
+                android:textColor="@android:color/white"
+                app:layout_constraintStart_toEndOf="@id/humidityTitleTextView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:percent="@{viewmodel.currentWeatherLiveData.main.humidity}"
+                tools:text="90%" />
+
+            <TextView
+                android:id="@+id/minTempTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/min_temp"
+                android:textSize="12sp"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/humidityTitleTextView" />
+
+            <TextView
+                android:id="@+id/minTempTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textSize="12sp"
+                android:textColor="@android:color/white"
+                app:layout_constraintStart_toEndOf="@id/minTempTitleTextView"
+                app:layout_constraintTop_toBottomOf="@id/humidityTitleTextView"
+                app:temperature="@{viewmodel.currentWeatherLiveData.main.tempMin}"
+                tools:text="90%" />
+
+            <TextView
+                android:id="@+id/maxTempTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/max_temp"
+                android:textSize="12sp"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/minTempTitleTextView" />
+
+            <TextView
+                android:id="@+id/maxTempTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textSize="12sp"
+                android:textColor="@android:color/white"
+                app:layout_constraintStart_toEndOf="@id/maxTempTitleTextView"
+                app:layout_constraintTop_toBottomOf="@id/minTempTitleTextView"
+                app:temperature="@{viewmodel.currentWeatherLiveData.main.tempMax}"
+                tools:text="90%" />
+
+            <TextView
+                android:id="@+id/pressureTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pressure"
+                android:textSize="12sp"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/maxTempTitleTextView" />
+
+            <TextView
+                android:id="@+id/pressureTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textColor="@android:color/white"
+                android:text="@{Double.toString(viewmodel.currentWeatherLiveData.main.pressure)}"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/pressureTitleTextView"
+                app:layout_constraintTop_toBottomOf="@id/maxTempTitleTextView"
+                tools:text="90%" />
+
+            <TextView
+                android:id="@+id/cityNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewmodel.currentWeatherLiveData.cityName}"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pressureTitleTextView"
+                tools:text="MainFragment" />
+
+            <TextView
+                android:id="@+id/conditionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewmodel.currentWeatherLiveData.weather.get(0).main}"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cityNameTextView"
+                tools:text="MainFragment" />
+
+            <TextView
+                android:id="@+id/temperatureTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/conditionTextView"
+                app:temperature="@{viewmodel.currentWeatherLiveData.main.temp}"
+                tools:text="MainFragment" />
+
+            <TextView
+                android:id="@+id/todayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/today"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temperatureTextView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hourlyForecastRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/todayTextView" />
+
+            <TextView
+                android:id="@+id/nextDaysTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/next_days"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hourlyForecastRecyclerView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/daysForecastRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nextDaysTextView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/loader"
+            layout="@layout/layout_loader"
+            app:visibleIf="@{viewmodel.loaderCountLiveData > 0}" />
+
+    </LinearLayout>
+
+</layout>
