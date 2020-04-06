@@ -55,7 +55,6 @@ class SearchFragment : Fragment() {
 
         citiesAdapter = CityNamesAdapter(requireContext(), mutableListOf()) {
             viewModel.updateWeather(it)
-            ViewHelper.hideSoftKeyboard(requireActivity())
             findNavController().navigateUp()
         }
         binding.cityRecyclerView.adapter = citiesAdapter
@@ -87,6 +86,11 @@ class SearchFragment : Fragment() {
                 }
             }
         )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        ViewHelper.hideSoftKeyboard(requireActivity())
     }
 
     //listener for debouncing search queries for not making request on every char typed
